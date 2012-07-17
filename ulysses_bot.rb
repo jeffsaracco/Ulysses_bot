@@ -8,24 +8,21 @@ Yes, I must.
 His pace slackened. Here. Am I going to aunt Sara's or not? My consubstantial father's voice. Did you see anything of your artist brother Stephen lately? No? Sure he's not down in Strasburg terrace with his aunt Sally? Couldn't he fly a bit higher than that, eh? And and and and tell us, Stephen, how is uncle Si? O, weeping God, the things I married into! De boys up in de hayloft. The drunken little costdrawer and his brother, the cornet player. Highly respectable gondoliers! And skeweyed Walter sirring his father, no less! Sir. Yes, sir. No, sir. Jesus wept: and no wonder, by Christ!
 EOF
 
-def split_text_into_pairs_of_words(text)
-  new_pair_array = []
-  text_array = text.split(" ")
-  text_array.each_with_index do |word, index|
-    new_pair_array << "#{word} #{text_array[index + 1]}"
-  end
-  new_pair_array
-end
+source_text_words = source_text.split(' ')
+word_pairs_and_probabilities = {}
 
-my_new_pair_array = split_text_into_pairs_of_words(source_text)
-
-def record_the_probability(text)
-  hash_of_probabilities = {}
-  text_array = text.split(" ")
-  text_array.each_with_index do |word, index|
-    temp_array = hash_of_probabilities[word]
+source_text_words.each_with_index do |word, index|
+  hash_key = "#{word} #{source_text_words[index + 1]}"
+  hash_value = source_text_words[index + 2]
+  if word_pairs_and_probabilities[hash_key]
+    word_pairs_and_probabilities[hash_key] << hash_value
+  else
+    word_pairs_and_probabilities[hash_key] = [hash_value]
   end
 end
 
+puts word_pairs_and_probabilities
 
-# generate_random_text
+
+# simple_hash = {}
+# simple_hash["they came"] =["down"]
