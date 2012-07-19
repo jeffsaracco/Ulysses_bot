@@ -21,36 +21,20 @@ source_text_words.each_with_index do |word, index|
   end
 end
 
-puts word_pairs_and_probabilities
-
-
-# simple_hash = {}
-# simple_hash["they came"] =["down"]
-
 # puts word_pairs_and_probabilities
-key_word = 'They came'   # initial value
-print key_word, " "
+output_text = ['They', 'came']
 
 story = 0
 while story < 35 do
-  split_word = key_word.split(' ')
-	word1 = split_word[0]
-	word2 = split_word[1]
-	word3 = word_pairs_and_probabilities[key_word].sample
-	print word3, " "
-		key_word = word2 + " " + word3
-	if word3.include? (".")
-   		story += 1
-   		puts " "
-	end
-	if word3.include? ("?")
-   		story += 1
-   		puts " "
-	end
+  word_pair = output_text.last(2).join(' ')
+  next_word = word_pairs_and_probabilities[word_pair].sample unless word_pairs_and_probabilities[word_pair].nil?
+  output_text << next_word
+
+  if next_word && (next_word.include?(".") || next_word.include?("?"))
+    story += 1
+  end
 end
-puts " "
-
-
+puts output_text.join(' ')
 
 
 
