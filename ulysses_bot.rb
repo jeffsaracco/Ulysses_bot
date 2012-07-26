@@ -1,16 +1,16 @@
 class LitBot
   def eat_file(file_name)
     file = File.open(file_name)
-    @source_text = file.read
+    self.source_text = file.read
     file.close
   end
 
   def speak_first_10_words
-    puts @source_text.split(' ').first(10)
+    puts source_text.split(' ').first(10)
   end
 
   def digest_file
-    @source_text_words = @source_text.split(' ')
+    @source_text_words = source_text.split(' ')
     @word_pairs_and_probabilities = {}
 
     @source_text_words.each_with_index do |word, index|
@@ -48,20 +48,12 @@ class LitBot
   end
 
   def +(other_bot)
-    shiny_new_litbot = LitBot.new(@source_text + other_bot.grab_source_text)
+    shiny_new_litbot = LitBot.new(source_text + other_bot.source_text)
   end
 
   #getter
   def source_text
     @source_text
-  end
-
-  def grab_source_text
-    @source_text
-  end
-
-  def set_source_text(text)
-    @source_text = text
   end
 
   #setter
@@ -70,7 +62,7 @@ class LitBot
   end
 
   def initialize(text="Any string")
-    set_source_text(text)
+    self.source_text = text
   end
 end
 
